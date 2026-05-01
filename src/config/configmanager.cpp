@@ -230,6 +230,7 @@ bool ConfigManager::load() {
 	loadFloatConfig(L, RATE_SOUL_REGEN_SPEED, "rateSoulRegenSpeed", 1.0);
 	loadFloatConfig(L, RATE_SOUL_REGEN, "rateSoulRegen", 1.0);
 	loadFloatConfig(L, RATE_SPELL_COOLDOWN, "rateSpellCooldown", 1.0);
+	loadFloatConfig(L, RATE_WEAPON_PROFICIENCY, "rateWeaponProficiency", 1.0);
 	loadFloatConfig(L, RUSE_CHANCE_FORMULA_A, "ruseChanceFormulaA", 0.0307576);
 	loadFloatConfig(L, RUSE_CHANCE_FORMULA_B, "ruseChanceFormulaB", 0.440697);
 	loadFloatConfig(L, RUSE_CHANCE_FORMULA_C, "ruseChanceFormulaC", 0.026);
@@ -269,6 +270,9 @@ bool ConfigManager::load() {
 	loadIntConfig(L, DEFAULT_DESPAWNRANGE, "deSpawnRange", 2);
 	loadIntConfig(L, DISCORD_WEBHOOK_DELAY_MS, "discordWebhookDelayMs", Webhook::DEFAULT_DELAY_MS);
 	loadIntConfig(L, EX_ACTIONS_DELAY_INTERVAL, "timeBetweenExActions", 1000);
+	loadIntConfig(L, NECKLACE_DELAY_INTERVAL, "timeBetweenNecklace", 200);
+	loadIntConfig(L, RING_DELAY_INTERVAL, "timeBetweenRing", 200);
+	loadIntConfig(L, PARALYZE_DELAY_INTERVAL, "timeAfterParalyze", 200);
 	loadIntConfig(L, EXP_FROM_PLAYERS_LEVEL_RANGE, "expFromPlayersLevelRange", 75);
 	loadIntConfig(L, FAMILIAR_TIME, "familiarTime", 30);
 	loadIntConfig(L, FORGE_BASE_SUCCESS_RATE, "forgeBaseSuccessRate", 50);

@@ -2954,6 +2954,13 @@ bool Player::closeShopWindow() {
 }
 
 void Player::onWalk(Direction &dir) {
+	if (hasCondition(CONDITION_PARALYZE)) {
+		uint32_t delay = g_configManager().getNumber(PARALYZE_DELAY_INTERVAL);
+		setNextAction(OTSYS_TIME() + delay);
+		lastWalking = OTSYS_TIME() + delay;
+		return;
+	}
+
 	if (hasCondition(CONDITION_FEARED)) {
 		const Position pos = getNextPosition(dir, getPosition());
 
@@ -12318,6 +12325,7 @@ EquippedWeaponProficiencyBonuses &Player::getEquippedWeaponProficiency() {
 
 void Player::addWeaponProficiencyExperience(const std::shared_ptr<MonsterType> &mType, const ForgeClassifications_t classification, const bool bossSoulpit) {
 	uint32_t addProficiencyExperience = 0;
+	const auto weaponProficiencyRate = std::max(0.0f, g_configManager().getFloat(RATE_WEAPON_PROFICIENCY));
 	if (bossSoulpit) {
 		addProficiencyExperience = 1500;
 	} else {
@@ -12372,6 +12380,8 @@ void Player::addWeaponProficiencyExperience(const std::shared_ptr<MonsterType> &
 			}
 		}
 	}
+
+	addProficiencyExperience = static_cast<uint32_t>(std::round(addProficiencyExperience * weaponProficiencyRate));
 
 	const auto &weapon = getWeapon(true);
 	if (!weapon) {
@@ -12721,7 +12731,10 @@ void Player::removeEquippedWeaponProficiency(const uint16_t itemId) {
 }
 
 bool Player::canExiva(const std::string &spellParam) const {
-	if (g_game().getWorldType() != WORLDTYPE_OPTIONAL && !g_configManager().getBoolean(EXIVA_RESTRICTIONS_ONLY_OPTIONAL_WORLDS)) {
+	const bool restrictOnlyOptional = g_configManager().getBoolean(EXIVA_RESTRICTIONS_ONLY_OPTIONAL_WORLDS);
+	const bool isOptionalWorld = g_game().getWorldType() == WORLDTYPE_OPTIONAL;
+
+	if (restrictOnlyOptional && !isOptionalWorld) {
 		return true;
 	}
 

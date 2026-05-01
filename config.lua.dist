@@ -446,6 +446,9 @@ maxHousesLimit = 3
 -- Item Usage
 timeBetweenActions = 200
 timeBetweenExActions = 1000
+timeBetweenNecklace = 500
+timeBetweenRing = 500
+timeAfterParalyze = 500
 
 -- Push
 -- NOTE: pushDelay: interval for every push
@@ -582,6 +585,7 @@ enableScreenshots = false
 
 -- Rates
 -- NOTE: rateExp, rateSkill and rateMagic is used when 'rateUseStages = false' - or a fallback only
+-- NOTE: rateWeaponProficiency multiplies Weapon Proficiency experience gained from kills
 -- To configure rates see file data/stages.lua
 -- lowLevelBonusExp works up to level 50
 rateUseStages = false
@@ -591,6 +595,7 @@ rateSkill = 1
 rateLoot = 1
 rateMagic = 1
 rateSpawn = 1
+rateWeaponProficiency = 1
 
 -- Killing in the name of Quest
 rateKillingInTheNameOfPoints = 1
