@@ -21,7 +21,9 @@ monster.speed = 115
 monster.manaCost = 0
 
 monster.events = {
-	"RatmiralBlackwhiskersDeath",
+	"ratmiralDeath",
+	"BugMonsterDeath",
+	"ratmiralHealth",
 }
 
 monster.changeTarget = {
@@ -64,9 +66,9 @@ monster.light = {
 }
 
 monster.summon = {
-	maxSummons = 4,
+	maxSummons = 1,
 	summons = {
-		{ name = "elite pirat", chance = 30, interval = 1000 },
+		{ name = "tibianus", chance = 100, interval = 2000, count = 1 },
 	},
 }
 
@@ -76,46 +78,36 @@ monster.voices = {
 }
 
 monster.loot = {
-	{ id = 3043, chance = 100000, minCount = 1, maxCount = 3 }, -- crystal coin
-	{ id = 3035, chance = 55000, minCount = 1, maxCount = 39 }, -- platinum coin
-	{ id = 7642, chance = 40000, minCount = 1, maxCount = 19 }, -- great spirit potion
-	{ id = 7643, chance = 40000, minCount = 1, maxCount = 19 }, -- ultimate health potion
-	{ id = 239, chance = 30000, minCount = 1, maxCount = 19 }, -- great health potion
-	{ id = 238, chance = 30000, minCount = 1, maxCount = 19 }, -- great mana potion
-	{ id = 23373, chance = 25000, minCount = 1, maxCount = 19 }, -- ultimate mana potion
-	{ id = 7440, chance = 22000, minCount = 1, maxCount = 9 }, -- mastermind potion
-	{ id = 7443, chance = 20000, minCount = 1, maxCount = 9 }, -- bullseye potion
-	{ id = 35572, chance = 17000, minCount = 3, maxCount = 102 }, -- pirate coin
-	{ id = 7439, chance = 16000, minCount = 1, maxCount = 9 }, -- berserk potion
-	{ id = 35613, chance = 8000 }, -- ratmiral's hat
-	{ id = 35571, chance = 7140 }, -- small treasure chest
-	{ id = 35578, chance = 6250 }, -- tiara
-	{ id = 35579, chance = 3570 }, -- golden dustbin
-	{ id = 32626, chance = 2680 }, -- amber
-	{ id = 35581, chance = 2680 }, -- golden cheese wedge
-	{ id = 35595, chance = 2680 }, -- soap
-	{ id = 35695, chance = 1790 }, -- scrubbing brush
-	{ id = 35614, chance = 890 }, -- cheesy membership card
-	{ id = 35523, chance = 890 }, -- exotic amulet
-	{ id = 35515, chance = 890 }, -- throwing axe
-	{ id = 35517, chance = 890 }, -- bast legs
-	{ id = 35516, chance = 890 }, -- exotic legs
-	{ id = 35518, chance = 890 }, -- jungle bow
-	{ id = 35524, chance = 890 }, -- jungle quiver
-	{ id = 35514, chance = 890 }, -- jungle flail
-	{ id = 35521, chance = 890 }, -- jungle rod
-	{ id = 35522, chance = 890 }, -- jungle wand
-	{ id = 35519, chance = 890 }, -- makeshift boots
-	{ id = 35520, chance = 890 }, -- make-do boots
-	{ id = 50270, chance = 890 }, -- bambus jo
-	{ id = 50186, chance = 890 }, -- jungle survivor legs
+	{ name = "crystal coin", chance = 12216, maxCount = 1 },
+	{ name = "great health potion", chance = 11069, maxCount = 10 },
+	{ name = "great mana potion", chance = 11220, maxCount = 10 },
+	{ name = "mastermind potion", chance = 13762, maxCount = 5 },
+	{ name = "pirate coin", chance = 13958, maxCount = 55 },
+	{ name = "ultimate mana potion", chance = 14751, maxCount = 10 },
+	{ name = "cheesy membership card", chance = 11109, maxCount = 1 },
+	{ name = "golden cheese wedge", chance = 15083, maxCount = 1 },
+	{ name = "exotic amulet", chance = 1250, maxCount = 1 },
+	{ name = "golden dustbin", chance = 4182, maxCount = 1 },
+	{ name = "throwing axe", chance = 1250, maxCount = 1 },
+	{ name = "exotic amulet", chance = 1250, maxCount = 1 },
+	{ name = "bast legs", chance = 1250, maxCount = 1 },
+	{ name = "exotic legs", chance = 1250, maxCount = 1 },
+	{ name = "jungle bow", chance = 1250, maxCount = 1 },
+	{ name = "jungle flail", chance = 1250, maxCount = 1 },
+	{ name = "jungle quiver", chance = 1250, maxCount = 1 },
+	{ name = "jungle rod", chance = 1250, maxCount = 1 },
+	{ name = "make-do boots", chance = 1250, maxCount = 1 },
+	{ name = "makeshift boots", chance = 1250, maxCount = 1 },
+	{ name = "soap", chance = 800, maxCount = 1 },
+	{ name = "scrubbing brush", chance = 800, maxCount = 1 },
+	{ name = "bambus jo", chance = 800, maxCount = 1 },
+	{ name = "jungle survivor legs", chance = 800, maxCount = 1 },
 }
 
 monster.attacks = {
-	{ name = "melee", interval = 2000, chance = 100, minDamage = -270, maxDamage = -500 },
-	{ name = "combat", interval = 2000, chance = 40, type = COMBAT_PHYSICALDAMAGE, minDamage = -300, maxDamage = -600, range = 7, shootEffect = CONST_ANI_WHIRLWINDCLUB, target = true },
-	{ name = "combat", interval = 2000, chance = 40, type = COMBAT_LIFEDRAIN, minDamage = -300, maxDamage = -600, radius = 4, effect = CONST_ME_MAGIC_RED, target = false },
-	{ name = "combat", interval = 2000, chance = 30, type = COMBAT_LIFEDRAIN, minDamage = -600, maxDamage = -1000, length = 4, spread = 0, effect = CONST_ME_SOUND_PURPLE, target = false },
+	{ name = "melee", interval = 2000, chance = 100, minDamage = -400, maxDamage = -1000 },
+	{ name = "ratmiral fire wave", interval = 2000, chance = 35 },
+	{ name = "ratmiral ball", interval = 2000, chance = 20 },
 }
 
 monster.defenses = {
@@ -142,5 +134,11 @@ monster.immunities = {
 	{ type = "invisible", condition = true },
 	{ type = "bleed", condition = false },
 }
+
+mType.onAppear = function(monster, creature)
+	if monster:getType():isRewardBoss() then
+		monster:setReward(true)
+	end
+end
 
 mType:register(monster)

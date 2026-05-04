@@ -20,7 +20,8 @@ monster.speed = 0
 monster.manaCost = 0
 
 monster.events = {
-	"TentuglysHeadDeath",
+	"tentuglysDeath",
+	"tentuglysHeadPhase",
 }
 
 monster.changeTarget = {
@@ -63,29 +64,28 @@ monster.voices = {
 }
 
 monster.loot = {
-	{ id = 3043, chance = 59860, minCount = 1, maxCount = 3 }, -- crystal coin
-	{ id = 23373, chance = 59860, minCount = 1, maxCount = 34 }, -- ultimate mana potion
-	{ id = 7643, chance = 47890, minCount = 1, maxCount = 33 }, -- ultimate health potion
-	{ id = 23374, chance = 28870, minCount = 2, maxCount = 19 }, -- ultimate spirit potion
-	{ id = 7439, chance = 23940, minCount = 1, maxCount = 9 }, -- berserk potion
-	{ id = 3035, chance = 23240, minCount = 2, maxCount = 19 }, -- platinum coin
-	{ id = 7443, chance = 20420, minCount = 1, maxCount = 9 }, -- bullseye potion
-	{ id = 7440, chance = 16900, minCount = 2, maxCount = 9 }, -- mastermind potion
-	{ id = 35572, chance = 13380, minCount = 3, maxCount = 86 }, -- pirate coin
-	{ id = 35508, chance = 7750 }, -- cheesy key
-	{ id = 32623, chance = 4930 }, -- giant topaz
-	{ id = 35571, chance = 4230 }, -- small treasure chest
-	{ id = 35581, chance = 3520 }, -- golden cheese wedge
-	{ id = 35580, chance = 3520 }, -- golden skull
-	{ id = 32622, chance = 2820 }, -- giant amethyst
-	{ id = 31911, chance = 2820 }, -- sea horse figurine
-	{ id = 30059, chance = 2110 }, -- giant ruby
-	{ id = 35579, chance = 2110 }, -- golden dustbin
-	{ id = 35576, chance = 2110 }, -- plushie of tentugly
-	{ id = 35611, chance = 2110 }, -- tentacle of tentugly
-	{ id = 35578, chance = 1410 }, -- tiara
-	{ id = 35610, chance = 700 }, -- tentugly's eye
-	{ id = 35612, chance = 700 }, -- tentugly's jaws
+	{ name = "crystal coin", chance = 13762, maxCount = 3 },
+	{ name = "berserk potion", chance = 13764, maxCount = 5 },
+	{ name = "bullseye potion", chance = 13560, maxCount = 5 },
+	{ name = "mastermind potion", chance = 13767, maxCount = 5 },
+	{ name = "pirate coin", chance = 13958, maxCount = 56 },
+	{ name = "platinum coin", chance = 13599, maxCount = 10 },
+	{ name = "ultimate health potion", chance = 13214, maxCount = 10 },
+	{ name = "ultimate mana potion", chance = 13251, maxCount = 10 },
+	{ name = "ultimate spirit potion", chance = 13015, maxCount = 10 },
+	{ name = "cheesy key", chance = 13333, maxCount = 1 },
+	{ name = "sea horse figurine", chance = 13182, maxCount = 1 },
+	{ name = "small treasure chest", chance = 13670, maxCount = 1 },
+	{ name = "golden cheese wedge", chance = 13404, maxCount = 1 },
+	{ name = "golden dustbin", chance = 13057, maxCount = 1 },
+	{ name = "golden skull", chance = 13901, maxCount = 1 },
+	{ name = "giant topaz", chance = 13328, maxCount = 1 },
+	{ name = "giant amethyst", chance = 13557, maxCount = 1 },
+	{ name = "tiara", chance = 14012, maxCount = 1 },
+	{ name = "plushie of tentugly", chance = 14555, maxCount = 1 },
+	{ name = "tentugly's eye", chance = 1250, maxCount = 1 },
+	{ name = "tentugly's jaws", chance = 1250, maxCount = 1 },
+	{ id = 35611, chance = 13763, maxCount = 1 },
 }
 
 monster.attacks = {
@@ -120,5 +120,11 @@ monster.immunities = {
 	{ type = "invisible", condition = true },
 	{ type = "bleed", condition = false },
 }
+
+mType.onAppear = function(monster, creature)
+	if monster:getType():isRewardBoss() then
+		monster:setReward(true)
+	end
+end
 
 mType:register(monster)
